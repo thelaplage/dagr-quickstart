@@ -1,0 +1,80 @@
+# UPSTREAM_PIN.yaml — dagr-quickstart v0.1
+#
+# The exact bytes this quickstart's producer and verifier environments are built
+# against. The demo's behavior is meaningful only relative to these pins.
+#
+# Derived from: arcs-ecosystem-kit/RELEASE_MANIFEST_CANDIDATE_v0-1.yaml
+# (manifest_id: arcs-ecosystem.release-manifest-candidate.v0.1, status: candidate)
+#
+# Pin authority: the canonical cross-repo supported-pin set is now established
+# at arcs-ecosystem-kit/examples/planning/SUPPORTED_PINS.yaml (pin_set_id:
+# arcs-ecosystem.supported-pins.v0.1, proposed-local / canonical:false).
+# This file carries the same byte identities for the producer and verifier
+# entries used by this quickstart. Do not treat proposed-local status as
+# ratification; the ratification seat is currently VACANT (see manifest).
+
+quickstart: dagr-quickstart
+status: candidate
+pinned_at: "2026-08-06"
+
+# ---------------------------------------------------------------------------
+# PRODUCER dependency — the governed runtime boundary. Installed NON-editable
+# from the pinned git commit; dagr-mcp HEAD has since moved (dropped the stdio
+# connector), so HEAD must not be used.
+# ---------------------------------------------------------------------------
+producer:
+  package: dagr-mcp
+  repository: dagr-mcp
+  remote: "https://github.com/thelaplage/dagr-mcp.git"
+  merged_pr: 30
+  commit: "2aebf54bd4bc5609074de8fa12205c74378483e4"
+  tree: "6d92d36e1189d64897e974ca7e95c6e8f5a5cfa3"
+  install_command: >-
+    pip install "git+https://github.com/thelaplage/dagr-mcp.git@2aebf54bd4bc5609074de8fa12205c74378483e4"
+  install_mode: "non-editable"
+  consumed_surface:
+    - "dagr_mcp.fastmcp_binding (DAGRMiddleware, DAGRMiddlewareConfig, BindingPolicy, ActorResolution)"
+    - "dagr_mcp.srs_receipts (SignedReceiptEmitter, SigningIdentity, RawEnvelopeFileSink)"
+  authority_state: "governing-and-pinned"
+  cross_ref: >-
+    arcs-ecosystem-kit/RELEASE_MANIFEST_CANDIDATE_v0-1.yaml#pins.runtime_implementation[dagr-mcp]
+    (commit 2aebf54, PR#30, tree 6d92d36)
+
+# ---------------------------------------------------------------------------
+# VERIFIER dependency — installed NON-editable into a SEPARATE interpreter.
+# The verifier must never share an environment with the producer.
+#
+# Commit reconciliation: the release manifest and the canonical pin review
+# (docs/ARCS_VERIFY_PIN_REVIEW.yaml, pin_review_id: arcs-verify.canonical-pin.v0-1)
+# both lock e6d6eaca68b85428c1a8b7674a8cf4d6269952d6 (PR#14 merge, main).
+# The commit 9e99a1fbca1f5935d3d1778d6551ebaa9f87f148 is the local HEAD that
+# has since advanced beyond the pin (manifest pin_drift_note). The canonical
+# pin e6d6eaca is used here; 9e99a1f is not a supported byte identity.
+# ---------------------------------------------------------------------------
+verifier:
+  package: arcs-verify
+  repository: arcs-verify
+  remote: "https://github.com/thelaplage/arcs-verify.git"
+  version: "0.1.1"
+  merged_pr: 14
+  commit: "e6d6eaca68b85428c1a8b7674a8cf4d6269952d6"
+  tree: "9dc06120de18b60898187062438def1bb896f374"
+  install_command: >-
+    pip install "git+https://github.com/thelaplage/arcs-verify.git@e6d6eaca68b85428c1a8b7674a8cf4d6269952d6"
+  install_mode: "non-editable"
+  profile: "srs.mcp.sdk_enforcement.v0.1"
+  authority_state: "governing-and-pinned"
+  cross_ref: >-
+    arcs-ecosystem-kit/RELEASE_MANIFEST_CANDIDATE_v0-1.yaml#pins.verifier[arcs-verify]
+    (commit e6d6eaca, PR#14, tree 9dc06120);
+    arcs-ecosystem-kit/docs/ARCS_VERIFY_PIN_REVIEW.yaml
+    (pin_review_id: arcs-verify.canonical-pin.v0-1, reviewed_commit: e6d6eaca)
+
+separation:
+  contract: "reciprocal producer/verifier separation (dagr-pack-filesystem@edad883)"
+  producer_must_not_contain: ["arcs_verify"]
+  verifier_must_not_contain: ["dagr_mcp", "dagr_mcp_service"]
+  verifier_invocation: "scripts/verify_receipts.py under F1_VERIFIER_PYTHON"
+
+demo_signing:
+  note: "Ed25519 seed is a fixed, public, NON-production value with no production validity."

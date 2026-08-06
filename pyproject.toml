@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dagr-quickstart"
+version = "0.1.0"
+description = "The minimal governed action, end to end: DAGR-governed, arcs-verify-checked, in one command."
+requires-python = ">=3.12,<3.13"
+# dagr-mcp and arcs-verify are private, commit-pinned packages installed from the
+# sibling source repos (pip install -e), not a public index. See README "Setup"
+# and bootstrap.sh. They are intentionally not listed here.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=9,<10", "pytest-asyncio>=1.3,<2"]
+
+[project.scripts]
+dagr-quickstart = "dagr_quickstart.cli:main"
+
+[tool.setuptools]
+packages = ["dagr_quickstart"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
