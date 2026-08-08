@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcs.example/contracts/dagr-srs-verification-report-v0-1/verification-execution-record.schema.json",
+  "title": "DAGR SRS verification execution record (frozen v0.1)",
+  "description": "Execution metadata for one asserted ARCS Verify invocation: which receipt, trust bundle, verifier build, configuration, and report it bound together. Contains execution facts (execution_id, executed_at) that are deliberately absent from the deterministic report. Unknown fields fail closed: this schema defines no extension location.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "execution_record_version",
+    "execution_contract_id",
+    "execution_id",
+    "executed_at",
+    "verifier_repository",
+    "verifier_commit",
+    "verifier_entrypoint",
+    "verifier_configuration_digest",
+    "receipt_id",
+    "receipt_artifact_hash",
+    "trust_bundle_digest",
+    "verification_report_digest",
+    "verification_report_digest_algorithm",
+    "verification_report_canonicalization",
+    "authentication_scope_statement"
+  ],
+  "properties": {
+    "execution_record_version": {
+      "const": "v0.1"
+    },
+    "execution_contract_id": {
+      "const": "srs.dagr_verification_execution.v0.1"
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Opaque identifier for this asserted invocation. Execution metadata, not a deterministic verification result."
+    },
+    "executed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Wall-clock time of this asserted invocation. Execution metadata, not a deterministic verification result."
+    },
+    "verifier_repository": {
+      "const": "https://github.com/thelaplage/arcs-verify"
+    },
+    "verifier_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "description": "Full git commit SHA of the arcs-verify checkout that performed this invocation. Never a mutable ref."
+    },
+    "verifier_entrypoint": {
+      "const": "arcs_verify.cli:main"
+    },
+    "verifier_configuration_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Must equal the paired verification report's verifier_configuration_digest."
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Must equal the paired verification report's receipt_id."
+    },
+    "receipt_artifact_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Must equal the paired verification report's receipt_artifact_hash."
+    },
+    "trust_bundle_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Must equal the paired verification report's trust_bundle_digest."
+    },
+    "verification_report_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256(RFC8785-JCS(complete deterministic verification report object)), lowercase hex, no prefix."
+    },
+    "verification_report_digest_algorithm": {
+      "const": "sha256"
+    },
+    "verification_report_canonicalization": {
+      "const": "RFC8785-JCS"
+    },
+    "authentication_scope_statement": {
+      "const": "This execution record binds an asserted invocation to exact input and output artifacts. Standing alone, it does not authenticate who executed the verifier or authorize an export.",
+      "description": "Fixed disclaimer. Standing alone, an execution record does not authenticate who executed the verifier or authorize an export; that belongs to a later, separate exporter contract."
+    }
+  }
+}

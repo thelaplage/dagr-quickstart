@@ -1,0 +1,25 @@
+{
+  "execution_contract_id": "srs.dagr_verification_execution.v0.1",
+  "verifier_repository": "https://github.com/thelaplage/arcs-verify",
+  "verifier_package": "arcs-verify",
+  "verifier_package_version": "0.1.1",
+  "verifier_entrypoint": "arcs_verify.cli:main",
+  "verifier_console_script": "arcs-verify",
+  "verifier_module_invocation": "python -m arcs_verify.cli",
+  "verifier_report_subcommand": "arcs-verify dagr-report RECEIPT --keyring TRUST_BUNDLE --profile srs.mcp.sdk_enforcement.v0.1 --verifier-commit <full-40-hex-sha> --execution-id <opaque-id> --executed-at <RFC3339-timestamp>",
+  "verifier_entrypoint_pin_note": "verifier_entrypoint is the pinned console-script target declared in [project.scripts] of pyproject.toml. It is not 'main', not 'latest', and not an unpinned package range: the exact behavior is fixed to the arcs-verify package version and git commit recorded alongside it in each report and execution record.",
+  "supported_receipt_contract_ref": "supported-receipt-contract.json",
+  "receipt_hash_contract_ref": "receipt-hash-contract.json",
+  "verification_report_schema_ref": "verification-report.schema.json",
+  "verification_execution_record_schema_ref": "verification-execution-record.schema.json",
+  "deterministic_environment_assumptions": [
+    "Python >= 3.11, per requires-python in pyproject.toml",
+    "cryptography>=46.0.4,<47, per pyproject.toml dependencies",
+    "rfc8785==0.1.4 (exact pin), per pyproject.toml dependencies",
+    "jsonschema>=4.26,<5, per pyproject.toml dependencies",
+    "the pinned envelope schema file arcs_verify/data/srs-envelope-v0.2.0.schema.json must hash to d03aad1d5517e2acb65d5c866905aed7219bcbbfadd1a4a97eac546dd23f0333 (the schema_digest verdict fails otherwise)"
+  ],
+  "commit_pinning_note": "verifier_commit MUST be the exact full git commit SHA (40 lowercase hex characters) of the arcs-verify checkout that performed the invocation. It is supplied explicitly by the caller (see --verifier-commit on the dagr-report subcommand) rather than introspected at runtime, because an installed package may not carry a .git directory. 'main', 'latest', mutable branch refs, and unpinned version ranges are never valid execution identity.",
+  "golden_regeneration_note": "The golden/ fixtures in this contract directory were generated against the feat/dagr-srs-verifier-report-contract-v0-1 feature-branch commit at authoring time. Per repository precedent (see docs/VERSIONING.md), before this contract is treated as merged-authoritative, the golden verification-report and verification-execution-record fixtures MUST be regenerated against the final reviewed PR head and then reconciled to the squash-merge commit.",
+  "not_authenticated_note": "Neither this execution contract nor the execution records it describes authenticate who ran the verifier, or authorize any downstream export. See authentication_scope_statement in verification-execution-record.schema.json."
+}

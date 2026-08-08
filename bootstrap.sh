@@ -9,24 +9,32 @@
 # This layout is the reciprocal producer/verifier separation the ecosystem
 # proved in dagr-pack-filesystem@edad883. A subprocess call alone is NOT
 # independence when both sides share one installed environment.
+#
+# Both dagr-mcp and arcs-verify are installed from vendored source trees at their
+# exact pinned commits (see vendor/ and VENDOR_PROVENANCE.md). No network access
+# to any private repository is required. Public dependencies (fastmcp, cryptography,
+# etc.) are fetched from PyPI as normal.
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Pinned upstream bytes — see UPSTREAM_PIN.yaml.
-# Both packages are installed from their exact pinned git commits per
-# arcs-ecosystem-kit/RELEASE_MANIFEST_CANDIDATE_v0-1.yaml.
-# dagr-mcp HEAD has since moved (it dropped the stdio connector); install ONLY
-# from this pinned commit. arcs-verify is pinned at the canonical PR#14 review
-# commit (see arcs-ecosystem-kit/docs/ARCS_VERIFY_PIN_REVIEW.yaml).
-DAGR_MCP_PIN_URL="git+https://github.com/thelaplage/dagr-mcp.git@2aebf54bd4bc5609074de8fa12205c74378483e4"
-ARCS_VERIFY_PIN_URL="git+https://github.com/thelaplage/arcs-verify.git@e6d6eaca68b85428c1a8b7674a8cf4d6269952d6"
+# Vendored source directories — pinned commit bytes, digest-verified at vendor time.
+# See VENDOR_PROVENANCE.md for source repo, commit, and sha256 of each archive.
+DAGR_MCP_SRC="$HERE/vendor/dagr-mcp"
+ARCS_VERIFY_SRC="$HERE/vendor/arcs-verify"
+
+if [[ ! -d "$DAGR_MCP_SRC" || ! -d "$ARCS_VERIFY_SRC" ]]; then
+  echo "ERROR: vendor/ source trees missing. They should be committed to the repo." >&2
+  echo "  expected: $DAGR_MCP_SRC" >&2
+  echo "  expected: $ARCS_VERIFY_SRC" >&2
+  exit 1
+fi
 
 command -v uv >/dev/null 2>&1 || { echo "ERROR: 'uv' required (https://docs.astral.sh/uv/)." >&2; exit 1; }
 
 echo "==> [1/4] producer .venv: dagr-quickstart + dagr-mcp (pinned, NON-editable), no arcs-verify"
 uv venv --python 3.12 "$HERE/.venv"
-uv pip install --python "$HERE/.venv/bin/python" "$DAGR_MCP_PIN_URL" -e "$HERE[dev]"
+uv pip install --python "$HERE/.venv/bin/python" "$DAGR_MCP_SRC" -e "$HERE[dev]"
 
 echo "==> [2/4] assert producer isolation (arcs_verify NOT discoverable in .venv)"
 "$HERE/.venv/bin/python" - <<'PY'
@@ -38,7 +46,7 @@ PY
 
 echo "==> [3/4] verifier .venv-verifier: arcs-verify (NON-editable), no dagr-mcp"
 uv venv --python 3.12 "$HERE/.venv-verifier"
-uv pip install --python "$HERE/.venv-verifier/bin/python" "$ARCS_VERIFY_PIN_URL"
+uv pip install --python "$HERE/.venv-verifier/bin/python" "$ARCS_VERIFY_SRC"
 
 echo "==> [4/4] assert verifier isolation (dagr_mcp NOT discoverable; arcs_verify under own site-packages)"
 "$HERE/.venv-verifier/bin/python" - <<'PY'

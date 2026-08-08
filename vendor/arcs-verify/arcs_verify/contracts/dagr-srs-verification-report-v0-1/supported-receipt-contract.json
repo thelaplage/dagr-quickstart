@@ -1,0 +1,12 @@
+{
+  "supported_receipt_contract_id": "srs.mcp.sdk_enforcement",
+  "supported_receipt_contract_version": "v0.1",
+  "profile_identifier": "srs.mcp.sdk_enforcement.v0.1",
+  "receipt_version": "srs.core.v5.1",
+  "envelope_schema_id": "https://arcs.example/schemas/srs/srs-envelope-v0.2.0.schema.json",
+  "envelope_schema_file": "arcs_verify/data/srs-envelope-v0.2.0.schema.json",
+  "envelope_schema_sha256": "d03aad1d5517e2acb65d5c866905aed7219bcbbfadd1a4a97eac546dd23f0333",
+  "envelope_additional_properties_note": "The pinned envelope schema declares additionalProperties: true at the top level. An unknown top-level receipt field is therefore NOT rejected by the envelope or profile Boolean verdicts today. It DOES change receipt_artifact_hash, because that hash covers the complete receipt object. This contract preserves that existing, documented behavior rather than silently tightening it.",
+  "supported_receipt_kinds": ["admission", "outcome"],
+  "out_of_scope_note": "This contract binds only the DAGR MCP receipt-emitter/runtime binding's supported profile, srs.mcp.sdk_enforcement.v0.1, and its admission/outcome receipt kinds. srs.connection.lifecycle.v0.1 and its receipt kinds (connect, scope_grant, retention_selection, revoke, delete) are out of scope for this v0.1 report/execution-record contract. Building a report for any other profile selection or receipt_kind is refused (raises), not silently reported."
+}

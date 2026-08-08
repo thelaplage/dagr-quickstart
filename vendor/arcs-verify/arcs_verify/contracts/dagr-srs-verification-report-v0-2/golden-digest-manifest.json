@@ -1,0 +1,38 @@
+{
+  "digest_algorithm": "sha256",
+  "file_count": 14,
+  "files": {
+    "golden/expectations.json": "a59d5f539c5bcd881959810c7634c4d1df780a871b894fc99211d4e4632f5b6c",
+    "golden/origin-binding-minted-receipt.json": "ac4e02331fd5b033dc0906143462b83678d46c83b8d196e85aa7dc745b02fe40",
+    "golden/origin-binding-minted-report.json": "2701ebd8037ea2ad0d037b301e9b5d9b7f2464d295778f3b31459c2a3b7da835",
+    "golden/origin-derived-from-request-receipt.json": "ca91733885cd22c1d13b1d9d591be4e616ca251d5f45a53b241ca2c6da7e9b5c",
+    "golden/origin-derived-from-request-report.json": "b3c04953e8f35f2df420cf2d5e8099de8a17c7116ba2d92f39bee76435e43e52",
+    "golden/origin-derived-from-session-receipt.json": "bc3c05230accd9b8d42eb0a75148c61dd25f41f5270770868ffba64874135e9a",
+    "golden/origin-derived-from-session-report.json": "286f5c4cd5b9841e5e72f46ec92f32fc9d4a047bba940391459680906fa8e936",
+    "golden/origin-derived-from-supplied-correlation-receipt.json": "ba56e822a186e924ea641a8cd2048468642d431f714ae9aee0772e8d6c46292d",
+    "golden/origin-derived-from-supplied-correlation-report.json": "e0b0472411c7e1b5d2f9855049c3dc3e7ff555151516901dbc444ad5b49b3362",
+    "golden/origin-not-declared-receipt.json": "e15f8bca27cf3c7630e3da9bc83e11f6d2758134706346910bb65b71baf45b1f",
+    "golden/origin-not-declared-report.json": "fec00cf0e3dc308b21f1571ff60946b31a9b5769fb1c3941a6f89b66eca14a21",
+    "golden/origin-supplied-subject-receipt.json": "2d7d92dcbc4d040cb0564aa4165bf95c047489a782c721406eaa23016fe9ce45",
+    "golden/origin-supplied-subject-report.json": "7f5746fde57146af4b4c58aed0749180a5597dc4f1ae82e5c3b6ab53291e835f",
+    "golden/trust-bundle.json": "f4ff17924b60c01ce3f299cef574c01340197290893547e9af49275122484b37"
+  },
+  "generator": "tools/generate_dagr_report_v0_2_goldens.py",
+  "generator_command": "python tools/generate_dagr_report_v0_2_goldens.py --verifier-commit c26af32fcb638489217f4cb43845eca7b2824516 --output-dir arcs_verify/contracts/dagr-srs-verification-report-v0-2/golden",
+  "golden_directory": "golden",
+  "implementation_merge_commit": "c26af32fcb638489217f4cb43845eca7b2824516",
+  "input_fixture_note": "golden/ receipts and golden/trust-bundle.json are byte-identical to their input-fixtures/ counterparts by construction. input-fixtures/ remains generator input and is not pinned here.",
+  "manifest_id": "srs.dagr_verification_report.v0.2.golden_digest_manifest",
+  "report_contract_id": "srs.dagr_verification_report.v0.2",
+  "scope_note": "Pins every file the deterministic generator writes into golden/. Regenerating with the same --verifier-commit reproduces these bytes exactly; a digest that no longer matches is drift, not an update.",
+  "verifier_commit": "c26af32fcb638489217f4cb43845eca7b2824516",
+  "verifier_commit_carrying_files": [
+    "golden/expectations.json",
+    "golden/origin-binding-minted-report.json",
+    "golden/origin-derived-from-request-report.json",
+    "golden/origin-derived-from-session-report.json",
+    "golden/origin-derived-from-supplied-correlation-report.json",
+    "golden/origin-not-declared-report.json",
+    "golden/origin-supplied-subject-report.json"
+  ]
+}

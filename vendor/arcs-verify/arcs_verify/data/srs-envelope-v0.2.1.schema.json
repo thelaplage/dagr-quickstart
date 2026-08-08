@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcs.example/schemas/srs/srs-envelope-v0.2.1.schema.json",
+  "title": "SRS Envelope v0.2.1",
+  "type": "object",
+  "required": [
+    "receipt_version",
+    "receipt_id",
+    "receipt_type",
+    "boundary_type",
+    "protocol_binding",
+    "subject_ref",
+    "issued_at",
+    "artifact_classes_covered",
+    "artifact_classes_excluded",
+    "attestation_limits",
+    "extensions"
+  ],
+  "properties": {
+    "receipt_version": {"type": "string"},
+    "profile_id": {"type": "string"},
+    "profile_version": {"type": "string"},
+    "receipt_id": {"type": "string"},
+    "receipt_type": {
+      "type": "string",
+      "enum": ["sdk_enforcement", "grace_session", "connection", "provenance"]
+    },
+    "receipt_kind": {"type": "string"},
+    "boundary_type": {"type": "string"},
+    "protocol_binding": {"type": "string"},
+    "subject_ref": {"type": "string"},
+    "subject_ref_origin": {
+      "type": "string",
+      "enum": [
+        "supplied_subject",
+        "derived_from_session",
+        "derived_from_request",
+        "derived_from_supplied_correlation",
+        "binding_minted"
+      ]
+    },
+    "issuer_id": {"type": "string"},
+    "runtime_instance_id": {"type": "string"},
+    "tenant_id": {"type": "string"},
+    "workspace_id": {"type": "string"},
+    "actor_ref": {"type": "string"},
+    "policy_pack_id": {"type": "string"},
+    "policy_pack_version": {"type": "string"},
+    "boundary_id": {"type": "string"},
+    "logical_call_id": {"type": "string"},
+    "parent_receipt_ref": {"type": "string"},
+    "admission_receipt_ref": {"type": "string"},
+    "review_object_ref": {"type": "string"},
+    "requested_tool_name": {"type": "string"},
+    "resolved_tool_ref": {"type": "string"},
+    "tool_resolution_status": {"type": "string"},
+    "disposition": {"type": "string"},
+    "outcome": {"type": "string"},
+    "retry_contract": {"type": "string"},
+    "reason_code": {"type": "string"},
+    "argument_digest": {"type": "string"},
+    "result_digest": {"type": "string"},
+    "issued_at": {"type": "string"},
+    "artifact_classes_covered": {"type": "array", "items": {"type": "string"}},
+    "artifact_classes_excluded": {"type": "array", "items": {"type": "string"}},
+    "attestation_limits": {"type": "array", "items": {"type": "string"}},
+    "retention_class_applied": {"type": "string"},
+    "extensions": {"type": "object"},
+    "receipt_signature": {
+      "type": "object",
+      "required": ["algorithm", "canonicalization", "key_id", "signature"],
+      "properties": {
+        "algorithm": {"const": "Ed25519"},
+        "canonicalization": {"const": "RFC8785-JCS"},
+        "key_id": {"type": "string", "minLength": 1},
+        "signature": {"type": "string", "pattern": "^[A-Za-z0-9_-]+$"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

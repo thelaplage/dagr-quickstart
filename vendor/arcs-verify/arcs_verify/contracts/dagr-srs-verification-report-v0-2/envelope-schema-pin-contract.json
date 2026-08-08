@@ -1,0 +1,58 @@
+{
+  "envelope_schema_pin_contract_id": "srs.dagr_verification_report.envelope_schema_pins.v0.2",
+  "pin_note": "Both pins are accepted. Accepting the v0.2.1 pin is additive: an input that verified under the v0.2.0 pin before this change verifies identically after it, and an input offered with any unpinned schema still fails the schema_digest verdict. No pre-existing pass/fail disposition moves.",
+  "pins": [
+    {
+      "envelope_version": "v0.2.0",
+      "sha256": "d03aad1d5517e2acb65d5c866905aed7219bcbbfadd1a4a97eac546dd23f0333",
+      "identity": "srs-envelope@0.2.0+sha256:d03aad1d5517e2acb65d5c866905aed7219bcbbfadd1a4a97eac546dd23f0333",
+      "runtime_artifact": "arcs_verify/data/srs-envelope-v0.2.0.schema.json",
+      "vendored_artifact": "vendor/arcs-srs/schemas/srs-envelope/v0.2.0/srs-envelope.schema.json",
+      "status": "retained",
+      "role": "Verifies historical v0.2.0-era receipts. Retained unchanged; its bytes are untouched by this lane."
+    },
+    {
+      "envelope_version": "v0.2.1",
+      "sha256": "2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "identity": "srs-envelope@0.2.1+sha256:2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "runtime_artifact": "arcs_verify/data/srs-envelope-v0.2.1.schema.json",
+      "vendored_artifact": "vendor/arcs-srs/schemas/srs-envelope/v0.2.1/srs-envelope.schema.json",
+      "status": "added",
+      "role": "Adds the optional subject_ref_origin property with exact-membership rejection over the closed five-value vocabulary. Differs from v0.2.0 only in $id, title, and that property."
+    }
+  ],
+  "source_repository": "arcs-srs",
+  "source_merge_commit": "ccc4e4bbcd195914be70be392c89094bf8e2781b",
+  "source_reviewed_head": "31948af33599d9151f16c0ce70de4d0f4e7cb2a9",
+  "source_schema_path": "schemas/srs-envelope/v0.2.1/srs-envelope.schema.json",
+  "byte_identity_note": "arcs_verify/data/srs-envelope-v0.2.1.schema.json and vendor/arcs-srs/schemas/srs-envelope/v0.2.1/srs-envelope.schema.json are byte-identical to the arcs-srs merge commit named above and hash to the pinned sha256.",
+  "published_version_note": "published_version in the vendored envelope manifest is pre-release artifact metadata. It names a manifested pre-release envelope artifact version and is not evidence that a public SRS release occurred.",
+  "receipt_version_note": "receipt_version srs.core.v5.1 is an internal pre-public-release compatibility value. It is unchanged by this lane and is not a public, current-public, or forward public identifier.",
+  "vector_set": {
+    "vector_set_id": "srs.envelope.subject-ref-origin.v0.2.1",
+    "vendored_path": "vendor/arcs-srs/vectors/subject-ref-origin-v0.2.1/",
+    "note": "Unsigned envelope vectors. They pin origin-reading behavior only and prove nothing about signing; the signed vector sets remain the authority for that.",
+    "entries": [
+      {
+        "path": "valid/supplied-subject.json",
+        "receipt_file_sha256": "08f3795780821e31b70fb6370e4701978f9cb8729aa170bafc35a7c1b7110097",
+        "expected_origin_reading": "supplied_subject"
+      },
+      {
+        "path": "valid/derived-from-supplied-correlation.json",
+        "receipt_file_sha256": "989cb13c203f7282f8c526427b75d6e10496c357ccec847a08e777e3852c2574",
+        "expected_origin_reading": "derived_from_supplied_correlation"
+      },
+      {
+        "path": "valid/binding-minted.json",
+        "receipt_file_sha256": "ee0506879037351389b19785b8029da564b08282331175488ff3af7645a97154",
+        "expected_origin_reading": "binding_minted"
+      },
+      {
+        "path": "valid/v0-2-0-era-not-declared.json",
+        "receipt_file_sha256": "98a9b481891ffcb85712c6c30f3625f6cd4f3a86319ac46dc875a05aa8b067b5",
+        "expected_origin_reading": "not_declared"
+      }
+    ]
+  }
+}

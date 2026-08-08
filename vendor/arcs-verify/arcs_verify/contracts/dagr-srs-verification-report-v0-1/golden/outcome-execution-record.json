@@ -1,0 +1,17 @@
+{
+  "authentication_scope_statement": "This execution record binds an asserted invocation to exact input and output artifacts. Standing alone, it does not authenticate who executed the verifier or authorize an export.",
+  "executed_at": "2026-07-21T00:00:01Z",
+  "execution_contract_id": "srs.dagr_verification_execution.v0.1",
+  "execution_id": "exec:golden:outcome:0001",
+  "execution_record_version": "v0.1",
+  "receipt_artifact_hash": "6a7b67808d544086e22ab6f1640a0927bfebbd0470d3909c6b1d6c237787c3a8",
+  "receipt_id": "urn:srs:receipt:outcome:dagr-fastmcp-fixture-1",
+  "trust_bundle_digest": "fabcd846b5375b3317721e7ff9eb26b12024495dca6b82617d815fdfd2073aeb",
+  "verification_report_canonicalization": "RFC8785-JCS",
+  "verification_report_digest": "424ed8a1110c45db11eaaea11220b53920f93527e85ac5ff0d6afead1d996e4d",
+  "verification_report_digest_algorithm": "sha256",
+  "verifier_commit": "da89ebe36f1e4d9921aeeb7ff12f377d6804e8f7",
+  "verifier_configuration_digest": "ef2e742e02c61d15703ee3a67ef53ecffbe7cc107673c4dfc82ddc2070e0d0d4",
+  "verifier_entrypoint": "arcs_verify.cli:main",
+  "verifier_repository": "https://github.com/thelaplage/arcs-verify"
+}

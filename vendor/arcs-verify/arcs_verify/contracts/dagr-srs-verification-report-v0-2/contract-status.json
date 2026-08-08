@@ -1,0 +1,36 @@
+{
+  "contract_status_id": "srs.dagr_verification_report.v0.2.status",
+  "report_contract_id": "srs.dagr_verification_report.v0.2",
+  "status": "release_closed",
+  "release_closed": true,
+  "deterministic_golden_generation_available": true,
+  "merged_authoritative_report_goldens_exist": true,
+  "implementation_merge_commit": "c26af32fcb638489217f4cb43845eca7b2824516",
+  "golden_directory": "golden",
+  "golden_digest_manifest": "golden-digest-manifest.json",
+  "input_fixture_directory": "input-fixtures",
+  "input_fixture_note": "input-fixtures/ holds deterministic generator inputs only. They are not goldens, not authoritative, and not frozen.",
+  "committed_report_goldens_note": "golden/ holds the authoritative v0.2 verification reports and expectations.json committed by the post-merge closure pull request. Every one of them carries verifier_commit c26af32fcb638489217f4cb43845eca7b2824516, the exact implementation squash-merge commit.",
+  "generator": "tools/generate_dagr_report_v0_2_goldens.py",
+  "generator_required_arguments": [
+    "--verifier-commit",
+    "--output-dir"
+  ],
+  "verifier_commit_pattern": "^[0-9a-f]{40}$",
+  "verifier_commit_inference_note": "The generator never infers execution identity. There is no branch-base default, no implicit HEAD lookup and no repository-state fallback.",
+  "closure": {
+    "required": true,
+    "completed": true,
+    "stage": "post_merge_closure_pull_request",
+    "verifier_commit_source": "exact implementation squash-merge commit",
+    "verifier_commit": "c26af32fcb638489217f4cb43845eca7b2824516",
+    "prohibited_verifier_commit_sources": [
+      "branch base commit",
+      "implementation branch HEAD",
+      "any mutable ref"
+    ],
+    "command": "python tools/generate_dagr_report_v0_2_goldens.py --verifier-commit c26af32fcb638489217f4cb43845eca7b2824516 --output-dir arcs_verify/contracts/dagr-srs-verification-report-v0-2/golden",
+    "committed_by": "the post-merge closure pull request, not the implementation pull request",
+    "closes_contract": true
+  }
+}
