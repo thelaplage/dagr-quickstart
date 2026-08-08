@@ -1,0 +1,16 @@
+# The sdist ships the installable package, its declared package data (the
+# vendored SRS schema/profiles under dagr_mcp/vendor), the license, and the
+# readme. Development-only trees and provenance patches are not part of the
+# distribution and are pruned so no test code or development artifact enters an
+# artifact.
+include LICENSE
+include README.md
+include CHANGELOG.md
+prune tests
+prune docs
+prune tools
+prune .github
+# The second-binding inventory ships with the sdist so the official-SDK binding
+# carries its seam documentation (the broad docs/ tree stays pruned).
+include docs/OFFICIAL_MCP_SDK_BINDING.md
+global-exclude *.patch

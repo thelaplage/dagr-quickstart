@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arcs.example/contracts/dagr-srs-verification-report-v0-2/verification-report.schema.json",
+  "title": "DAGR SRS deterministic verification report v0.2 (with subject-reference origin disclosure)",
+  "description": "Deterministic results of one ARCS Verify invocation over one signed DAGR SRS receipt (srs.mcp.sdk_enforcement.v0.1 only). Identical to the frozen v0.1 report except for the two version identifiers and the single added field subject_ref_origin_disclosed. Contains no wall-clock time, random identifiers, hostnames, or temporary paths. Unknown fields fail closed: this schema defines no extension location.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_version",
+    "report_contract_id",
+    "receipt_id",
+    "receipt_kind",
+    "receipt_artifact_hash",
+    "receipt_artifact_hash_algorithm",
+    "receipt_artifact_canonicalization",
+    "supported_receipt_contract_id",
+    "supported_receipt_contract_version",
+    "verifier_repository",
+    "verifier_commit",
+    "verifier_entrypoint",
+    "verifier_configuration_digest",
+    "trust_bundle_digest",
+    "verdicts",
+    "chain_status",
+    "subject_ref_origin_disclosed",
+    "failure_codes"
+  ],
+  "properties": {
+    "report_version": {
+      "const": "v0.2",
+      "description": "Version of this report contract, not the arcs-verify package version."
+    },
+    "report_contract_id": {
+      "const": "srs.dagr_verification_report.v0.2"
+    },
+    "receipt_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Verbatim receipt_id copied from the verified receipt."
+    },
+    "receipt_kind": {
+      "type": "string",
+      "enum": ["admission", "outcome"],
+      "description": "This contract covers only the DAGR MCP receipt-emitter/runtime binding's admission and outcome receipt kinds under srs.mcp.sdk_enforcement.v0.1. Other profiles (e.g. srs.connection.lifecycle.v0.1) are out of scope, exactly as in v0.1."
+    },
+    "receipt_artifact_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256(RFC8785-JCS(complete accepted receipt JSON object, including receipt_signature)), lowercase hex, no prefix. Unchanged from v0.1; defined authoritatively in the v0.1 receipt-hash-contract.json."
+    },
+    "receipt_artifact_hash_algorithm": {
+      "const": "sha256"
+    },
+    "receipt_artifact_canonicalization": {
+      "const": "RFC8785-JCS"
+    },
+    "supported_receipt_contract_id": {
+      "const": "srs.mcp.sdk_enforcement",
+      "description": "Verbatim profile_id identity this report was verified against."
+    },
+    "supported_receipt_contract_version": {
+      "const": "v0.1",
+      "description": "Verbatim profile_version identity this report was verified against. Profile semantics are versioned separately from the envelope: reading a v0.2.1 envelope field does not move the profile version."
+    },
+    "verifier_repository": {
+      "const": "https://github.com/thelaplage/arcs-verify"
+    },
+    "verifier_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$",
+      "description": "Full git commit SHA of the arcs-verify checkout that performed this verification. Never a mutable ref such as 'main' or 'latest'."
+    },
+    "verifier_entrypoint": {
+      "const": "arcs_verify.cli:main",
+      "description": "The pinned console-script target that performs the eight-Boolean verification this report wraps."
+    },
+    "verifier_configuration_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256(RFC8785-JCS) over {envelope_schema_sha256, receipt_version, selected_profile}. envelope_schema_sha256 names the pinned envelope schema actually used: the retained v0.2.0 pin for historical receipts, or the v0.2.1 pin. The recipe is unchanged from v0.1, so a v0.2.0-schema verification yields the identical digest v0.1 yields."
+    },
+    "trust_bundle_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "sha256(RFC8785-JCS(complete trust-bundle JSON object)) actually used for this verification. Recording this digest does not assert the trust bundle was authorized; only that it is the exact artifact used."
+    },
+    "verdicts": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Exactly the eight existing Boolean ARCS verdict fields, unchanged in name, meaning, and value from v0.1. chain_status is NOT a ninth verdict and MUST NOT appear here. subject_ref_origin_disclosed is NOT a verdict and MUST NOT appear here.",
+      "required": [
+        "schema_digest",
+        "envelope",
+        "profile",
+        "raw_content_exclusion",
+        "signature_valid",
+        "issuer_key_resolved",
+        "issuer_key_trusted",
+        "attestation_limits_present"
+      ],
+      "properties": {
+        "schema_digest": { "type": "boolean" },
+        "envelope": { "type": "boolean" },
+        "profile": { "type": "boolean" },
+        "raw_content_exclusion": { "type": "boolean" },
+        "signature_valid": { "type": "boolean" },
+        "issuer_key_resolved": { "type": "boolean" },
+        "issuer_key_trusted": { "type": "boolean" },
+        "attestation_limits_present": { "type": "boolean" }
+      }
+    },
+    "chain_status": {
+      "type": "string",
+      "enum": ["not_applicable"],
+      "description": "Reported separately from verdicts, never a ninth Boolean, and unchanged from v0.1. This contract only reaches not_applicable for standalone signed DAGR receipts; a widened domain requires a new contract version."
+    },
+    "subject_ref_origin_disclosed": {
+      "type": "string",
+      "enum": [
+        "supplied_subject",
+        "derived_from_session",
+        "derived_from_request",
+        "derived_from_supplied_correlation",
+        "binding_minted",
+        "not_declared"
+      ],
+      "description": "Disclosure, never a verdict. The five declared values are copied verbatim from a well-formed SRS envelope v0.2.1 subject_ref_origin. not_declared means the field was genuinely absent from the receipt and nothing more: it is not evidence of emitter vintage and must not be collapsed into any supplied class. not_declared is a report rendering only; it is not a member of the envelope enum and is never an emitted receipt value. A present but out-of-vocabulary subject_ref_origin is invalid input and is never rendered here. No value of this field can upgrade, downgrade, override, excuse, or replace any Boolean verdict or chain_status."
+    },
+    "failure_codes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Deterministic failure-code strings from the underlying verification (never raw receipt content or free-form error text). Unchanged from v0.1: origin disclosure contributes no failure code."
+    }
+  }
+}

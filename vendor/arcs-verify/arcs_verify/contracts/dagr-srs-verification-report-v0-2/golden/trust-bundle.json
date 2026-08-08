@@ -1,0 +1,13 @@
+{
+  "issuers": [
+    {
+      "algorithm": "Ed25519",
+      "issuer_id": "issuer:dagr:report-contract-v0-2",
+      "key_id": "issuer.dagr.report-contract-v0-2/receipt-signing/v1",
+      "not_after": "2036-01-01T00:00:00Z",
+      "not_before": "2026-01-01T00:00:00Z",
+      "public_key": "3rx_-sUvPtM31wfTyS3tBKjxWH1yh0AO6-xYaowwLVE",
+      "trusted": true
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "argument_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "artifact_classes_covered": [
+    "tool_call_admission"
+  ],
+  "artifact_classes_excluded": [
+    "raw_prompt",
+    "raw_output",
+    "raw_tool_arguments",
+    "raw_tool_result"
+  ],
+  "attestation_limits": [
+    "The receipt attests only to governance conditions at the named admission boundary."
+  ],
+  "boundary_id": "boundary:dagr:report-contract-v0-2",
+  "boundary_type": "mcp_tool_call",
+  "disposition": "admitted",
+  "extensions": {
+    "mcp": {
+      "binding_version": "fastmcp.middleware.v0.1"
+    }
+  },
+  "issued_at": "2026-07-31T12:00:00Z",
+  "issuer_id": "issuer:dagr:report-contract-v0-2",
+  "logical_call_id": "call-origin-fixture-1",
+  "policy_pack_id": "policy:dagr:report-contract-v0-2",
+  "policy_pack_version": "v0.1",
+  "profile_id": "srs.mcp.sdk_enforcement",
+  "profile_version": "v0.1",
+  "protocol_binding": "mcp",
+  "receipt_id": "urn:srs:receipt:admission:origin-not-declared",
+  "receipt_kind": "admission",
+  "receipt_signature": {
+    "algorithm": "Ed25519",
+    "canonicalization": "RFC8785-JCS",
+    "key_id": "issuer.dagr.report-contract-v0-2/receipt-signing/v1",
+    "signature": "2pw5dTOF9ZHff_mZvTlCpOSp-BqpVKQ8wnWXN39skHLh5sBsEP21CsJbGnmFMtDQPQz0ea-Alhl9o-mXdiQ4Ag"
+  },
+  "receipt_type": "sdk_enforcement",
+  "receipt_version": "srs.core.v5.1",
+  "requested_tool_name": "records_lookup",
+  "runtime_instance_id": "runtime:dagr:report-contract-v0-2",
+  "subject_ref": "tool-call:call-origin-fixture-1",
+  "tool_resolution_status": "not_observed"
+}

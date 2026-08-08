@@ -1,0 +1,28 @@
+{
+  "chain_status": "not_applicable",
+  "failure_codes": [],
+  "receipt_artifact_canonicalization": "RFC8785-JCS",
+  "receipt_artifact_hash": "06ff5c963f47e1bf4bea265e890a5557bc0f20b659fb0aef3b699170b9252e01",
+  "receipt_artifact_hash_algorithm": "sha256",
+  "receipt_id": "urn:srs:receipt:admission:dagr-fastmcp-fixture-1",
+  "receipt_kind": "admission",
+  "report_contract_id": "srs.dagr_verification_report.v0.1",
+  "report_version": "v0.1",
+  "supported_receipt_contract_id": "srs.mcp.sdk_enforcement",
+  "supported_receipt_contract_version": "v0.1",
+  "trust_bundle_digest": "fabcd846b5375b3317721e7ff9eb26b12024495dca6b82617d815fdfd2073aeb",
+  "verdicts": {
+    "attestation_limits_present": true,
+    "envelope": true,
+    "issuer_key_resolved": true,
+    "issuer_key_trusted": true,
+    "profile": true,
+    "raw_content_exclusion": true,
+    "schema_digest": true,
+    "signature_valid": true
+  },
+  "verifier_commit": "da89ebe36f1e4d9921aeeb7ff12f377d6804e8f7",
+  "verifier_configuration_digest": "ef2e742e02c61d15703ee3a67ef53ecffbe7cc107673c4dfc82ddc2070e0d0d4",
+  "verifier_entrypoint": "arcs_verify.cli:main",
+  "verifier_repository": "https://github.com/thelaplage/arcs-verify"
+}

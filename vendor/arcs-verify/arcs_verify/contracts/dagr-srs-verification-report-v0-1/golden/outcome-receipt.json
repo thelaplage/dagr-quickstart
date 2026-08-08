@@ -1,0 +1,46 @@
+{
+  "actor_ref": "actor:anonymous_or_local",
+  "admission_receipt_ref": "urn:srs:receipt:admission:dagr-fastmcp-fixture-1",
+  "artifact_classes_covered": [
+    "tool_call_outcome"
+  ],
+  "artifact_classes_excluded": [
+    "raw_prompt",
+    "raw_output",
+    "raw_tool_arguments",
+    "raw_tool_result"
+  ],
+  "attestation_limits": [
+    "The receipt attests only to governance conditions at the named admission boundary.",
+    "The receipt establishes the request, admission disposition, and semantic result returned at the configured boundary. It does not independently establish that the underlying tool body executed for this invocation, because middleware such as caches may satisfy a call without handler execution.",
+    "The middleware is installed once at the institutional trust boundary; receipts attest only to observations at that boundary."
+  ],
+  "boundary_id": "boundary:dagr:fastmcp",
+  "boundary_type": "mcp_tool_call",
+  "extensions": {
+    "mcp": {
+      "binding_version": "fastmcp.middleware.v0.1"
+    }
+  },
+  "issued_at": "2026-07-12T12:00:01Z",
+  "issuer_id": "issuer:dagr:fastmcp-fixture",
+  "logical_call_id": "call:dagr:fastmcp-fixture:1",
+  "outcome": "result_returned",
+  "profile_id": "srs.mcp.sdk_enforcement",
+  "profile_version": "v0.1",
+  "protocol_binding": "mcp",
+  "receipt_id": "urn:srs:receipt:outcome:dagr-fastmcp-fixture-1",
+  "receipt_kind": "outcome",
+  "receipt_signature": {
+    "algorithm": "Ed25519",
+    "canonicalization": "RFC8785-JCS",
+    "key_id": "issuer.dagr.fastmcp-fixture/receipt-signing/v1",
+    "signature": "tj4V3FToBIE3T902CMNyZaOUlkdYwovH6DpawMuMpDNhwnf2Q7oskPhSLBowo-6AYBvTtnPGmbitl11QG-LsBw"
+  },
+  "receipt_type": "sdk_enforcement",
+  "receipt_version": "srs.core.v5.1",
+  "result_digest": "sha256:f443bb788204bc89c29c077ad77d7a2c436bc88c4533f81541a02390f43471d2",
+  "retention_class_applied": "hash_only",
+  "runtime_instance_id": "runtime:dagr:fastmcp-fixture",
+  "subject_ref": "tool-call:call:dagr:fastmcp-fixture:1"
+}

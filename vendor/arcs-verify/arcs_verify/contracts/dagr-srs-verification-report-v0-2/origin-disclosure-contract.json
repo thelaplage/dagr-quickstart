@@ -1,0 +1,45 @@
+{
+  "origin_disclosure_contract_id": "srs.dagr_verification_report.subject_ref_origin.v0.2",
+  "report_field": "subject_ref_origin_disclosed",
+  "receipt_field_read": "subject_ref_origin",
+  "receipt_field_source": "SRS envelope v0.2.1, srs-envelope@0.2.1+sha256:2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+  "declared_values": [
+    "supplied_subject",
+    "derived_from_session",
+    "derived_from_request",
+    "derived_from_supplied_correlation",
+    "binding_minted"
+  ],
+  "absence_rendering": "not_declared",
+  "disclosure_values": [
+    "supplied_subject",
+    "derived_from_session",
+    "derived_from_request",
+    "derived_from_supplied_correlation",
+    "binding_minted",
+    "not_declared"
+  ],
+  "not_a_verdict_note": "subject_ref_origin_disclosed is a disclosure. It is not a verdict, not a ninth Boolean, and not a companion to chain_status. No value it can carry upgrades, downgrades, overrides, excuses, or replaces any of the eight Boolean verdicts or chain_status. It never appears inside the verdicts object, which remains closed at exactly eight Boolean members.",
+  "enum_membership_note": "not_declared is not a member of the SRS envelope enum and does not appear in the envelope schema. It is the reader-and-report rendering of an absent field and is never an emitted receipt value. The envelope vocabulary is closed at the five declared values and carries no additional-value tolerance.",
+  "absence_semantics": "An absent subject_ref_origin means the field was not declared, full stop. It supports no inference about emitter vintage, about the producing binding, or about whether a subject was in fact supplied. It is never collapsed into supplied_subject or into any other declared class. A v0.2.0-era receipt that predates the field is indistinguishable, for this purpose, from a v0.2.1-era receipt that declined to declare one.",
+  "malformed_value_rule": "A present subject_ref_origin whose value is outside the five declared values -- including a present null, a non-string JSON type, or an unrecognized string -- is invalid input. It is rejected by the reader (arcs_verify.subject_ref_origin.MalformedSubjectRefOrigin) and, under the v0.2.1 envelope pin, also fails the envelope verdict on exact-membership rejection. It is never laundered into not_declared. Only true absence becomes not_declared.",
+  "reader_rules": [
+    "Read subject_ref_origin from the validated receipt bytes handed to the verifier.",
+    "A valid declared field discloses the exact declared token, copied verbatim.",
+    "A genuinely absent field discloses not_declared.",
+    "A present malformed value is invalid input or an existing schema failure, never not_declared.",
+    "Do not infer origin from subject_ref, request identifiers, session identifiers, correlation shape, or emitter identity.",
+    "Do not import emitter code. The verifier continues to recompute every reported value from the receipt bytes independently."
+  ],
+  "no_inference_inputs": [
+    "subject_ref",
+    "request identifiers",
+    "session identifiers",
+    "correlation shape",
+    "emitter identity",
+    "receipt vintage"
+  ],
+  "reader_implementation": "arcs_verify/subject_ref_origin.py",
+  "report_builder_implementation": "arcs_verify/dagr_report_v0_2.py",
+  "parity_note": "arcs_verify.dagr_report_v0_2.build_verification_report delegates to the frozen v0.1 builder and then restates report_version and report_contract_id and inserts subject_ref_origin_disclosed. There is no second verdict path, so v0.1/v0.2 parity on the eight Booleans, on chain_status, and on every hash field is structural rather than merely asserted."
+}

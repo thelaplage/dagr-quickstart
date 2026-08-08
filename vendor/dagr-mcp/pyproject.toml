@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dagr-mcp"
+version = "0.1.0"
+description = "MCP admission runtime and signed SRS receipt emitter"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Vega Commons Project, Inc." }]
+keywords = ["mcp", "fastmcp", "receipt", "srs", "admission", "middleware", "ed25519"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security :: Cryptography",
+  "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+  "cryptography>=46.0.4,<47",
+  "fastmcp>=3.4.4,<4",
+  "rfc8785==0.1.4",
+]
+
+[project.urls]
+Repository = "https://github.com/thelaplage/dagr-mcp"
+Issues = "https://github.com/thelaplage/dagr-mcp/issues"
+
+[project.scripts]
+dagr-mcp = "dagr_mcp.demo:main"
+dagr-mcp-demo = "dagr_mcp.demo:main"
+
+[project.optional-dependencies]
+# `build` is a test-only dependency of tests/test_packaging_inventories.py, which
+# builds the two distributions under packages/ and asserts their inventories.
+# Without it that guard silently skips, which is how the sdist test surface came
+# to be broken in the first place.
+dev = ["pytest>=9,<10", "pytest-asyncio>=1.3,<2", "jsonschema>=4.26,<5", "build>=1.2"]
+# The Amnesiac tools are an optional native integration, not an unconditional
+# base dependency. Without this extra the binding still imports and fails closed
+# with capability_unavailable; with it, the native producer-backed path runs.
+amnesiac = ["arcs-amnesiac>=0.2.0", "garp-sdk>=0.1.0"]
+# Sprint A5 — the second lifecycle binding, over the official Python MCP SDK.
+# The base package reaches ``mcp`` only transitively through fastmcp; this
+# optional extra declares the direct dependency explicitly. It is pinned to the
+# EXACT version proven by the Phase 1 inventory, the dedicated CI official-sdk
+# lane, and the clean-wheel official-SDK smoke (mcp==1.29.0). No broader range is
+# advertised, because no other SDK version has been exercised against this
+# binding, its mask, the real in-process tools/list + tools/call path, or the
+# cross-binding corpus. See docs/OFFICIAL_MCP_SDK_BINDING.md §1/§8.
+official-sdk = ["mcp==1.29.0"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+# Scoped to the legacy package's own test tree so a root-level `pytest` run never
+# sweeps up packages/*/tests (each new isolated distribution under packages/ has
+# its own pyproject.toml and is meant to be tested in its own environment; see
+# docs/CORE_EXTRACTION_FORK.md). This does not change what the legacy suite
+# itself collects or how it runs.
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["dagr_mcp*"]
+
+[tool.setuptools.package-data]
+dagr_mcp = ["vendor/srs/*.json", "vendor/srs/*.zip"]

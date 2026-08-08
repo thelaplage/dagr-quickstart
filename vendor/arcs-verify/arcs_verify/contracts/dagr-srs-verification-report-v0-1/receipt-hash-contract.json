@@ -1,0 +1,51 @@
+{
+  "receipt_artifact_hash": {
+    "algorithm": "sha256",
+    "canonicalization": "RFC8785-JCS",
+    "encoding": "UTF-8",
+    "input": "the complete accepted receipt JSON object, including receipt_signature",
+    "output": "lowercase hexadecimal SHA-256 digest, no prefix",
+    "purpose": "Binds the exact complete receipt object delivered to the verifier. Stable across JSON member insertion order (RFC8785-JCS canonicalizes key order); changes if any receipt field changes, including signature metadata.",
+    "implementation": "arcs_verify.dagr_report.receipt_artifact_hash"
+  },
+  "receipt_signature_verification": {
+    "algorithm": "Ed25519",
+    "canonicalization": "RFC8785-JCS",
+    "encoding": "UTF-8",
+    "input_contract": "the complete receipt JSON object with the receipt_signature.signature member deleted; every other receipt_signature member (algorithm, canonicalization, key_id) is retained in the signed preimage",
+    "verified_against": "the Ed25519 public key resolved from the trust bundle by receipt_signature.key_id",
+    "distinct_from_receipt_artifact_hash": "This preimage excludes receipt_signature.signature, so it is a strict subset of the bytes hashed by receipt_artifact_hash. A receipt can therefore have a valid signature and a receipt_artifact_hash that nonetheless changes if only the signature bytes themselves change (e.g. a legitimate re-signature over identical semantic content would need a matching signature, but an ALTERED signature value flips receipt_artifact_hash and signature_valid together).",
+    "implementation": "arcs_verify.verifier.verify_receipt (existing governed path; not reimplemented by this contract)"
+  },
+  "trust_bundle_digest": {
+    "algorithm": "sha256",
+    "canonicalization": "RFC8785-JCS",
+    "encoding": "UTF-8",
+    "input": "the complete trust-bundle JSON object supplied as --keyring for this invocation",
+    "output": "lowercase hexadecimal SHA-256 digest, no prefix",
+    "purpose": "Records the exact trust artifact used for verification. Does not by itself assert that the trust bundle was authorized; a later exporter/consumer contract establishes that.",
+    "implementation": "arcs_verify.dagr_report.trust_bundle_digest"
+  },
+  "verifier_configuration_digest": {
+    "algorithm": "sha256",
+    "canonicalization": "RFC8785-JCS",
+    "encoding": "UTF-8",
+    "input_object": {
+      "envelope_schema_sha256": "the FROZEN_SCHEMA_SHA256 constant pinned in arcs_verify/verifier.py",
+      "receipt_version": "the RECEIPT_VERSION constant pinned in arcs_verify/verifier.py",
+      "selected_profile": "the --profile value used for this invocation"
+    },
+    "output": "lowercase hexadecimal SHA-256 digest, no prefix",
+    "implementation": "arcs_verify.dagr_report.verifier_configuration_digest"
+  },
+  "verification_report_digest": {
+    "algorithm": "sha256",
+    "canonicalization": "RFC8785-JCS",
+    "encoding": "UTF-8",
+    "input": "the complete deterministic verification report JSON object defined by verification-report.schema.json",
+    "output": "lowercase hexadecimal SHA-256 digest, no prefix",
+    "purpose": "Binds a verification execution record to the exact report it asserts it produced.",
+    "implementation": "arcs_verify.dagr_report.verification_report_digest"
+  },
+  "rfc8785_conformance_note": "The rfc8785 dependency (pinned exactly at rfc8785==0.1.4 in pyproject.toml) implements RFC 8785 JSON Canonicalization Scheme, not merely recursively key-sorted JSON. It is the same dependency already used by arcs_verify.verifier for the Ed25519 signature preimage, and its conformance is exercised by the frozen vectors under vendor/arcs-srs/vectors/rfc8785/."
+}

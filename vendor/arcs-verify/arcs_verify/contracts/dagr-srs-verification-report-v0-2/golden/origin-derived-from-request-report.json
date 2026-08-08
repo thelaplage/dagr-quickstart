@@ -1,0 +1,29 @@
+{
+  "chain_status": "not_applicable",
+  "failure_codes": [],
+  "receipt_artifact_canonicalization": "RFC8785-JCS",
+  "receipt_artifact_hash": "bd265d5373e034ac620338156a9ee9e4c3d826f02c42c425e4904ae4f7d400dc",
+  "receipt_artifact_hash_algorithm": "sha256",
+  "receipt_id": "urn:srs:receipt:admission:origin-derived-from-request",
+  "receipt_kind": "admission",
+  "report_contract_id": "srs.dagr_verification_report.v0.2",
+  "report_version": "v0.2",
+  "subject_ref_origin_disclosed": "derived_from_request",
+  "supported_receipt_contract_id": "srs.mcp.sdk_enforcement",
+  "supported_receipt_contract_version": "v0.1",
+  "trust_bundle_digest": "99f8774f4f2d4e6aeefbda39373f7d39f5c2e383ce58e34f73c73c1ba6893416",
+  "verdicts": {
+    "attestation_limits_present": true,
+    "envelope": true,
+    "issuer_key_resolved": true,
+    "issuer_key_trusted": true,
+    "profile": true,
+    "raw_content_exclusion": true,
+    "schema_digest": true,
+    "signature_valid": true
+  },
+  "verifier_commit": "c26af32fcb638489217f4cb43845eca7b2824516",
+  "verifier_configuration_digest": "d8e157b3bd4bcc48249743080977d77db3a8bcadba7a1ca77d6d96d807f71518",
+  "verifier_entrypoint": "arcs_verify.cli:main",
+  "verifier_repository": "https://github.com/thelaplage/arcs-verify"
+}

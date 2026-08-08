@@ -1,0 +1,147 @@
+{
+  "contract": "srs.dagr_verification_report.v0.2",
+  "entries": [
+    {
+      "chain_status": "not_applicable",
+      "declared_subject_ref_origin": "supplied_subject",
+      "envelope_schema_sha256": "2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "envelope_schema_version": "v0.2.1",
+      "receipt_artifact_hash": "cb7faabd83e57316f38f582a73fd9dcddc24e7589a2f65e7b29cc5c39749a040",
+      "receipt_path": "origin-supplied-subject-receipt.json",
+      "report_path": "origin-supplied-subject-report.json",
+      "subject_ref_origin_disclosed": "supplied_subject",
+      "trust_bundle_digest": "99f8774f4f2d4e6aeefbda39373f7d39f5c2e383ce58e34f73c73c1ba6893416",
+      "verdicts": {
+        "attestation_limits_present": true,
+        "envelope": true,
+        "issuer_key_resolved": true,
+        "issuer_key_trusted": true,
+        "profile": true,
+        "raw_content_exclusion": true,
+        "schema_digest": true,
+        "signature_valid": true
+      },
+      "verification_report_digest": "5c6f9c080ed754d1f25e5f48f0bf13eb1a6ad916e7fed77b8b5063c3dd9615c5",
+      "verifier_configuration_digest": "d8e157b3bd4bcc48249743080977d77db3a8bcadba7a1ca77d6d96d807f71518"
+    },
+    {
+      "chain_status": "not_applicable",
+      "declared_subject_ref_origin": "derived_from_session",
+      "envelope_schema_sha256": "2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "envelope_schema_version": "v0.2.1",
+      "receipt_artifact_hash": "094bcb6a7a155d02073924ae983de6ef858e4f5ce191526732980691fcbd5335",
+      "receipt_path": "origin-derived-from-session-receipt.json",
+      "report_path": "origin-derived-from-session-report.json",
+      "subject_ref_origin_disclosed": "derived_from_session",
+      "trust_bundle_digest": "99f8774f4f2d4e6aeefbda39373f7d39f5c2e383ce58e34f73c73c1ba6893416",
+      "verdicts": {
+        "attestation_limits_present": true,
+        "envelope": true,
+        "issuer_key_resolved": true,
+        "issuer_key_trusted": true,
+        "profile": true,
+        "raw_content_exclusion": true,
+        "schema_digest": true,
+        "signature_valid": true
+      },
+      "verification_report_digest": "a3cf2d76c04a70b9692f83ddfa02bb851d09667b2af7af8340834d030e5b8535",
+      "verifier_configuration_digest": "d8e157b3bd4bcc48249743080977d77db3a8bcadba7a1ca77d6d96d807f71518"
+    },
+    {
+      "chain_status": "not_applicable",
+      "declared_subject_ref_origin": "derived_from_request",
+      "envelope_schema_sha256": "2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "envelope_schema_version": "v0.2.1",
+      "receipt_artifact_hash": "bd265d5373e034ac620338156a9ee9e4c3d826f02c42c425e4904ae4f7d400dc",
+      "receipt_path": "origin-derived-from-request-receipt.json",
+      "report_path": "origin-derived-from-request-report.json",
+      "subject_ref_origin_disclosed": "derived_from_request",
+      "trust_bundle_digest": "99f8774f4f2d4e6aeefbda39373f7d39f5c2e383ce58e34f73c73c1ba6893416",
+      "verdicts": {
+        "attestation_limits_present": true,
+        "envelope": true,
+        "issuer_key_resolved": true,
+        "issuer_key_trusted": true,
+        "profile": true,
+        "raw_content_exclusion": true,
+        "schema_digest": true,
+        "signature_valid": true
+      },
+      "verification_report_digest": "97b615d8f82888be110ebe6a341979c8bb89e9eb73012076718908100b5c8b0a",
+      "verifier_configuration_digest": "d8e157b3bd4bcc48249743080977d77db3a8bcadba7a1ca77d6d96d807f71518"
+    },
+    {
+      "chain_status": "not_applicable",
+      "declared_subject_ref_origin": "derived_from_supplied_correlation",
+      "envelope_schema_sha256": "2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "envelope_schema_version": "v0.2.1",
+      "receipt_artifact_hash": "0c0b41b0c501820cc1b650a37c4bcdb5f0dadb3421aab5cd47945d7d1126f9e1",
+      "receipt_path": "origin-derived-from-supplied-correlation-receipt.json",
+      "report_path": "origin-derived-from-supplied-correlation-report.json",
+      "subject_ref_origin_disclosed": "derived_from_supplied_correlation",
+      "trust_bundle_digest": "99f8774f4f2d4e6aeefbda39373f7d39f5c2e383ce58e34f73c73c1ba6893416",
+      "verdicts": {
+        "attestation_limits_present": true,
+        "envelope": true,
+        "issuer_key_resolved": true,
+        "issuer_key_trusted": true,
+        "profile": true,
+        "raw_content_exclusion": true,
+        "schema_digest": true,
+        "signature_valid": true
+      },
+      "verification_report_digest": "b9b78904700b6081525c68005840ea56754d0b1cceb3f55dd6aa5d7fbac0c6b5",
+      "verifier_configuration_digest": "d8e157b3bd4bcc48249743080977d77db3a8bcadba7a1ca77d6d96d807f71518"
+    },
+    {
+      "chain_status": "not_applicable",
+      "declared_subject_ref_origin": "binding_minted",
+      "envelope_schema_sha256": "2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "envelope_schema_version": "v0.2.1",
+      "receipt_artifact_hash": "9a7ef825450fab77084f0c78d15a2fdef219d92eb468eb43014c3a790928f318",
+      "receipt_path": "origin-binding-minted-receipt.json",
+      "report_path": "origin-binding-minted-report.json",
+      "subject_ref_origin_disclosed": "binding_minted",
+      "trust_bundle_digest": "99f8774f4f2d4e6aeefbda39373f7d39f5c2e383ce58e34f73c73c1ba6893416",
+      "verdicts": {
+        "attestation_limits_present": true,
+        "envelope": true,
+        "issuer_key_resolved": true,
+        "issuer_key_trusted": true,
+        "profile": true,
+        "raw_content_exclusion": true,
+        "schema_digest": true,
+        "signature_valid": true
+      },
+      "verification_report_digest": "755b2484b8e2dfaaa32c7f031cafc355d8e4b48d09596a50ce28a92defe13899",
+      "verifier_configuration_digest": "d8e157b3bd4bcc48249743080977d77db3a8bcadba7a1ca77d6d96d807f71518"
+    },
+    {
+      "chain_status": "not_applicable",
+      "declared_subject_ref_origin": null,
+      "envelope_schema_sha256": "2afa1ec9f093fd7c06c4f5db7bfd37cc63e64e3dcbe47c963f4df586a1c18ca1",
+      "envelope_schema_version": "v0.2.1",
+      "receipt_artifact_hash": "4a073981a38a7389f51b3b47fb1b0eddfc55ce8675a25e2c3840e3a0218bd407",
+      "receipt_path": "origin-not-declared-receipt.json",
+      "report_path": "origin-not-declared-report.json",
+      "subject_ref_origin_disclosed": "not_declared",
+      "trust_bundle_digest": "99f8774f4f2d4e6aeefbda39373f7d39f5c2e383ce58e34f73c73c1ba6893416",
+      "verdicts": {
+        "attestation_limits_present": true,
+        "envelope": true,
+        "issuer_key_resolved": true,
+        "issuer_key_trusted": true,
+        "profile": true,
+        "raw_content_exclusion": true,
+        "schema_digest": true,
+        "signature_valid": true
+      },
+      "verification_report_digest": "0c7aabb490ad29d95200a62d6e08fae5cd094b817f07b5e2a4b67b49c8debde7",
+      "verifier_configuration_digest": "d8e157b3bd4bcc48249743080977d77db3a8bcadba7a1ca77d6d96d807f71518"
+    }
+  ],
+  "generator": "tools/generate_dagr_report_v0_2_goldens.py",
+  "shared_subject_ref": "tool-call:call-origin-fixture-1",
+  "signing_seed_label": "arcs-verify:dagr-srs-verification-report-v0-2:golden-signing-seed:v1",
+  "verifier_commit": "c26af32fcb638489217f4cb43845eca7b2824516"
+}
