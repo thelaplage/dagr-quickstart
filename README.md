@@ -51,7 +51,7 @@ dagr-quickstart — the minimal governed action
 caller → ping/write_note → governed by dagr-mcp → signed SRS receipt → arcs-verify
 
   ✓ Read tool admitted by DAGR (ping)
-  ✓ Signed receipts emitted (3 total: 2 admission, 1 outcome, 1 refused-admission)
+  ✓ Signed receipts emitted (3 total: 2 admission — including 1 refused — plus 1 outcome)
   ✓ Verifier environment isolated (producer packages dagr_mcp / dagr_mcp_service undiscoverable)
   ✓ Receipts independently verified by arcs-verify, separate interpreter (3/3 genuine PASS, 3/3 mutations rejected)
 
@@ -77,11 +77,11 @@ Both packages are installed from `vendor/` — byte-identical copies of their
 pinned upstream commits. See [`VENDOR_PROVENANCE.md`](VENDOR_PROVENANCE.md)
 for the full pin record (source repo, commit, sha256 of each archive).
 
-Derived from
-[`arcs-ecosystem-kit/RELEASE_MANIFEST_CANDIDATE_v0-1.yaml`](../arcs-ecosystem-kit/RELEASE_MANIFEST_CANDIDATE_v0-1.yaml)
-(manifest_id: `arcs-ecosystem.release-manifest-candidate.v0.1`, status:
-candidate). See [`UPSTREAM_PIN.yaml`](UPSTREAM_PIN.yaml) for the full pin
-record and commit reconciliation notes.
+Derived from the ecosystem release-manifest candidate
+(`arcs-ecosystem.release-manifest-candidate.v0.1`, status: `candidate`). The
+public quickstart does not require access to that repository; see
+[`UPSTREAM_PIN.yaml`](UPSTREAM_PIN.yaml) for the complete pinned byte identities
+and reconciliation notes carried in this repo.
 
 ## Test
 
